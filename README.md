@@ -1,6 +1,6 @@
 # Can Of Books
 
-**Author**: Moayad Alhaj & balqees alfasatlah
+**Author**: Moayad Alhaj
 
 **Version**: 1.0.0
 
@@ -27,14 +27,14 @@ used bootstrap for styling
 
 ## Credit and Collaborations
 
-Moayad Alhaj & balqees alfasatlah
+Moayad Alhaj
 
 ### 1. Name of feature: Login
 
-Estimate of time needed to complete:
+Estimate of time needed to complete: 2
 
-Start time:
+Start time: 7
 
-Finish time:
+Finish time: 8:30
 
-Actual time needed to complete:
+Actual time needed to complete: 1:30
