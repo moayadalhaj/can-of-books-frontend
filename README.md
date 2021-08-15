@@ -1,6 +1,6 @@
 # Can Of Books
 
-**Author**: Moayad Alhaj & balqees alfasatlah
+**Author**: Moayad Alhaj
 
 **Version**: 1.0.0
 
@@ -27,7 +27,7 @@ used bootstrap for styling
 
 ## Credit and Collaborations
 
-Moayad Alhaj & balqees alfasatlah
+Moayad Alhaj
 
 ### 1. Name of feature: Login
 
