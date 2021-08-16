@@ -3,8 +3,8 @@ import Header from './Header';
 import IsLoadingAndError from './IsLoadingAndError';
 import Footer from './Footer';
 import Profile from './Profile';
-import BestBooks from './BestBooks'
-import Login from './Login'
+import BestBooks from './BestBooks';
+import Login from './Login';
 import { withAuth0 } from '@auth0/auth0-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -31,7 +31,9 @@ class App extends React.Component {
                 }
               </Route>
               <Route exact path="/profile">
-                <Profile />
+                {
+                  this.props.auth0.isAuthenticated && <Profile />
+                }
               </Route>
             </Switch>
             <Footer />
