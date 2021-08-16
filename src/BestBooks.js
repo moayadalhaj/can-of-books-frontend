@@ -1,9 +1,8 @@
 import React from 'react';
 import './BestBooks.css';
 import axios from "axios";
-// import { Carousel } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
-
 class MyFavoriteBooks extends React.Component {
 
   constructor(props) {
@@ -26,7 +25,7 @@ class MyFavoriteBooks extends React.Component {
             url: '/books'
           }
           axios(config)
-            .then((axiosResponse) => {
+            .then(axiosResponse => {
               this.setState({
                 bookData: axiosResponse.data,
               });
@@ -38,30 +37,34 @@ class MyFavoriteBooks extends React.Component {
   }
 
   render() {
-    console.log(this.state.books);
     return (
       <div className="jumbotron">
         <h1>My Favorite Books</h1>
         <p>
           This is a collection of my favorite books
         </p>
-        {/* {
-          this.props.auth0.isAuthenticated && this.bookData.map((element, index) => {
-            return (
-              <Carousel key={index} variant="dark">
-                <Carousel.Item>
-                  <h2>
-                    {element.title}
-                  </h2>
+        {
+          this.state.bookData.length > 0 && (<Carousel>
+            {this.state.bookData.map((element, index) => {
+              return (
+
+                <Carousel.Item key={index}>
+                  <img
+                    className="d-block w-100"
+                    src={`https://via.placeholder.com/800x400/000000/FFFFFF?text=${element.title}`}
+                    alt="First slide"
+                  />
                   <Carousel.Caption>
                     <h5>status:{element.status}</h5>
                     <p>{element.description}</p>
                   </Carousel.Caption>
                 </Carousel.Item>
-              </Carousel>
-            )
-          })
-        } */}
+              )
+            })
+            }
+          </Carousel>
+          )
+        }
       </div>
     )
   }
