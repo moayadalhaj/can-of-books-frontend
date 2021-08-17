@@ -1,14 +1,17 @@
 import React from 'react';
 import './BestBooks.css';
 import axios from "axios";
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Button } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
+import BookFormModal from './BookFormModal';
+
 class MyFavoriteBooks extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      bookData: []
+      bookData: [],
+      showModalForm: false
     };
   }
 
@@ -36,6 +39,52 @@ class MyFavoriteBooks extends React.Component {
     };
   }
 
+  showForm = (clicked) => {
+    this.setState({
+      showModalForm: clicked
+    })
+  }
+
+  addBookForm = (e) => {
+    e.preventDefault();
+    if (e.target.bookName.value) {
+      this.showForm(false);
+    }
+    let data = {
+      title: e.target.bookName.value,
+      status: e.target.status.value,
+      description: e.target.description.value,
+      email: this.props.auth0.user.email
+    }
+    let config = {
+      method: 'post',
+      baseURL: "http://localhost:8000",
+      url: '/books',
+      data: data
+    }
+    axios(config).then(res => {
+      let bookData = this.state.bookData
+      bookData.push(res.data)
+      this.setState({
+        bookData: bookData
+      })
+    });
+  }
+
+  deleteBook = (bookId) => {
+    let config = {
+      method: 'delete',
+      baseURL: "http://localhost:8000",
+      url: `/books/${bookId}`,
+    }
+    axios(config).then(res => {
+      this.setState({
+        bookData: res.data
+      })
+    })
+  }
+
+
   render() {
     return (
       <div className="jumbotron">
@@ -43,6 +92,15 @@ class MyFavoriteBooks extends React.Component {
         <p>
           This is a collection of my favorite books
         </p>
+        {
+          this.props.auth0.isAuthenticated &&
+          <Button variant="primary" className="mx-auto p-2 mb-2 d-flex jusrify-content-center" size="sm" onClick={() => this.showForm(true)} >
+            Add Book
+          </Button>
+        }
+        {
+          <BookFormModal show={this.state.showModalForm} addBookForm={this.addBookForm} hideModalForm={() => this.showForm(false)} />
+        }
         {
           this.state.bookData.length > 0 && (<Carousel>
             {this.state.bookData.map((element, index) => {
@@ -57,6 +115,9 @@ class MyFavoriteBooks extends React.Component {
                   <Carousel.Caption>
                     <h5>status:{element.status}</h5>
                     <p>{element.description}</p>
+                    <Button variant="danger" onClick={() => this.deleteBook(element._id)}>
+                      Delete Book
+                    </Button>
                   </Carousel.Caption>
                 </Carousel.Item>
               )
