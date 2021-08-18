@@ -6,7 +6,7 @@
 
 ## Overview
 
-The ability for a user to securly login to an application to store their data is crucial.
+The ability for a user to securly login to an application to store their data is crucial. Also, add, delete or update the books in the books from the books list in the database.
 
 ## Getting Started
 
@@ -58,3 +58,13 @@ Start time: 6:30
 Finish time: 7:30
 
 Actual time needed to complete: 1
+
+### 4. Name of feature: create Update Button to update books
+
+Estimate of time needed to complete: 2
+
+Start time: 3
+
+Finish time: 5:30
+
+Actual time needed to complete: 2:30
